@@ -1,55 +1,60 @@
 package com.app;
 
-import java.util.Objects;
-
 public class BaseConverter {
-
     public static void main(String[] args) {
-        // Check if valid input
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-        if (args.length != 2 && !Objects.equals(args[0], "help") && !Objects.equals(args[0], "-H")) {
-            System.out.println("Error: Expected 2 arguments, got " + args.length);
-            System.out.println("Make to arguments are in the form: <base> <value>");
+        if (args.length < 2) {
+            System.out.println("Veuillez fournir une chaîne de caractères à traduire et une base de traduction.");
             return;
         }
-        // Check if valid base
-        switch (args[0]) {
-            case "binary", "-b" -> {
-                System.out.println("Base chosen: Binary");
-                System.out.println(new Binary().Convert(args[1]));
-            }
-            case "octal", "-o" -> {
-                System.out.println("Base chosen: Octal");
-                System.out.println(new Octal().Convert(args[1]));
-            }
-            case "decimal", "-d" -> {
-                System.out.println("Base chosen: Decimal");
-                System.out.println(new Decimal().Convert(args[1]));
-            }
-            case "hexadecimal", "-h" -> {
-                System.out.println("Base chosen: Hexadecimal");
-                System.out.println(new Hexadecimal().Convert(args[1]));
-            }
-            case "text", "-t" -> {
-                System.out.println("Base chosen: Text");
-                System.out.println(new Text().Convert(args[1]));
-            }
-            case "help", "-H" -> {
-                System.out.println("-b, binary: Convert to binary");
-                System.out.println("-o, octal: Convert to octal");
-                System.out.println("-d, decimal: Convert to decimal");
-                System.out.println("-h, hexadecimal: Convert to hexadecimal");
-                System.out.println("-t, text: Convert to text");
-                System.out.println("--h, help: Show help\n");
-                System.out.println("Usage: java -jar BaseConverter.jar <base> <value>");
-                System.out.println("Example: java -jar BaseConverter.jar -b 1010");
-            }
-            default -> {
-                System.out.println("Invalid base: " + args[0]);
-                System.out.println("Valid bases: binary, octal, decimal, hexadecimal, text");
-            }
+
+        String input = args[1];
+        String base = args[0];
+
+        if (!isValidInput(input)) {
+            System.out.println("La chaîne de caractères est invalide.");
+            return;
+        }
+
+        if (!isValidBase(base)) {
+            System.out.println("La base de traduction est invalide.");
+            return;
+        }
+
+        BaseTranslator translator = createTranslator(base);
+        String convertedString = translator.convert(input);
+        System.out.println("Chaîne traduite : " + convertedString);
+    }
+
+    private static boolean isValidInput(String input) {
+        return input.matches("[a-zA-Z0-9 ]+");
+    }
+
+    private static boolean isValidBase(String base) {
+        return base.equals("binary") || base.equals("octal") || base.equals("decimal")
+                || base.equals("hexadecimal") || base.equals("text")
+                || base.equals("-b") || base.equals("-o") || base.equals("-d")
+                || base.equals("-h") || base.equals("-t");
+    }
+
+    private static BaseTranslator createTranslator(String base) {
+        switch (base) {
+            case "binary":
+            case "-b":
+                return new BinaryTranslator();
+            case "octal":
+            case "-o":
+                return new OctalTranslator();
+            case "decimal":
+            case "-d":
+                return new DecimalTranslator();
+            case "hexadecimal":
+            case "-h":
+                return new HexadecimalTranslator();
+            case "text":
+            case "-t":
+                return new TextTranslator();
+            default:
+                throw new IllegalArgumentException("Base de traduction invalide : " + base);
         }
     }
 }
-
