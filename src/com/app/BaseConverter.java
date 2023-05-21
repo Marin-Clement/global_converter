@@ -3,7 +3,7 @@ package com.app;
 public class BaseConverter {
     public static void main(String[] args) {
         if (args.length < 2) {
-            System.out.println("Veuillez fournir une chaîne de caractères à traduire et une base de traduction.");
+            System.out.println("Please provide a base and a string to convert.");
             return;
         }
 
@@ -11,18 +11,18 @@ public class BaseConverter {
         String base = args[0];
 
         if (!isValidInput(input)) {
-            System.out.println("La chaîne de caractères est invalide.");
+            System.out.println("Invalid Characters in input string.");
             return;
         }
 
         if (!isValidBase(base)) {
-            System.out.println("La base de traduction est invalide.");
+            System.out.println("Invalid base.");
             return;
         }
 
         BaseTranslator translator = createTranslator(base);
         String convertedString = translator.convert(input);
-        System.out.println("Chaîne traduite : " + convertedString);
+        System.out.println("Converted string: " + convertedString);
     }
 
     private static boolean isValidInput(String input) {
@@ -54,7 +54,7 @@ public class BaseConverter {
             case "-t":
                 return new TextTranslator();
             default:
-                throw new IllegalArgumentException("Base de traduction invalide : " + base);
+                throw new IllegalArgumentException("Invalid base: " + base);
         }
     }
 }
