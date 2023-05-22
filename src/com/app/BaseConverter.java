@@ -1,6 +1,7 @@
 package com.app;
 
 public class BaseConverter {
+
     public static void main(String[] args) {
         if (args.length < 2) {
             System.out.println("Please provide a base and a string to convert.");
@@ -22,7 +23,7 @@ public class BaseConverter {
 
         BaseTranslator translator = createTranslator(base);
         String convertedString = translator.convert(input);
-        System.out.println("Converted string: " + convertedString);
+        System.out.println("\033[31m\t" + "Converted string: " + convertedString);
     }
 
     private static boolean isValidInput(String input) {
