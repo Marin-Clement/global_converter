@@ -6,8 +6,7 @@ class BinaryTranslator implements BaseTranslator {
         StringBuilder result = new StringBuilder();
 
         for (char c : input.toCharArray()) {
-            int asciiValue = (int) c;
-            String binary = convertToBinary(asciiValue);
+            String binary = convertToBinary((int) c);
             result.append(binary);
             result.append(' ');
         }

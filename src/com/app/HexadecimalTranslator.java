@@ -6,8 +6,7 @@ class HexadecimalTranslator implements BaseTranslator {
         StringBuilder result = new StringBuilder();
 
         for (char c : input.toCharArray()) {
-            int asciiValue = (int) c;
-            String hexadecimal = convertToHexadecimal(asciiValue);
+            String hexadecimal = convertToHexadecimal((int) c);
             result.append(hexadecimal);
             result.append(' ');
         }

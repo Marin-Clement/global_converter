@@ -6,8 +6,7 @@ class DecimalTranslator implements BaseTranslator {
         StringBuilder result = new StringBuilder();
 
         for (char c : input.toCharArray()) {
-            int asciiValue = (int) c;
-            String decimal = String.valueOf(asciiValue);
+            String decimal = String.valueOf((int) c);
             result.append(decimal);
             result.append(' ');
         }

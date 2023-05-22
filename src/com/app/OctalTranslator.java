@@ -6,8 +6,7 @@ class OctalTranslator implements BaseTranslator {
         StringBuilder result = new StringBuilder();
 
         for (char c : input.toCharArray()) {
-            int asciiValue = (int) c;
-            String octal = convertToOctal(asciiValue);
+            String octal = convertToOctal((int) c);
             result.append(octal);
             result.append(' ');
         }
