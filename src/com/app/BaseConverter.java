@@ -37,24 +37,13 @@ public class BaseConverter {
     }
 
     private static BaseTranslator createTranslator(String base) {
-        switch (base) {
-            case "binary":
-            case "-b":
-                return new BinaryTranslator();
-            case "octal":
-            case "-o":
-                return new OctalTranslator();
-            case "decimal":
-            case "-d":
-                return new DecimalTranslator();
-            case "hexadecimal":
-            case "-h":
-                return new HexadecimalTranslator();
-            case "text":
-            case "-t":
-                return new TextTranslator();
-            default:
-                throw new IllegalArgumentException("Invalid base: " + base);
-        }
+        return switch (base) {
+            case "binary", "-b" -> new BinaryTranslator();
+            case "octal", "-o" -> new OctalTranslator();
+            case "decimal", "-d" -> new DecimalTranslator();
+            case "hexadecimal", "-h" -> new HexadecimalTranslator();
+            case "text", "-t" -> new TextTranslator();
+            default -> throw new IllegalArgumentException("Invalid base: " + base);
+        };
     }
 }
