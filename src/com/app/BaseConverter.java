@@ -35,7 +35,7 @@ public class BaseConverter {
                 || base.equals("hexadecimal") || base.equals("text")
                 || base.equals("-b") || base.equals("-o") || base.equals("-d")
                 || base.equals("-h") || base.equals("-t");
-    }
+     }
 
     private static BaseTranslator createTranslator(String base) {
         return switch (base) {
